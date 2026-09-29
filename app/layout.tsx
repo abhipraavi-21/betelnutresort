@@ -14,7 +14,8 @@ export const metadata: Metadata = {
   description:
     'Betelnut Resort in Diveagar offers coastal cottages, pool, restaurant, indoor games, children’s play area, Wi-Fi and stay enquiries near Diveagar Beach.',
   icons: {
-    icon: '/favicon.ico'
+    icon: [{ url: '/favicon.svg', type: 'image/svg+xml' }],
+    shortcut: '/favicon.svg'
   }
 };
 
