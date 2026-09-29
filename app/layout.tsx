@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import './globals.css';
 import { Footer } from '@/components/footer';
 import { Header } from '@/components/header';
+import { MotionEffects } from '@/components/motion-effects';
 import { site } from '@/lib/site-data';
 
 export const metadata: Metadata = {
@@ -51,6 +52,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
         />
+        <MotionEffects />
         <Header />
         <main>{children}</main>
         <Footer />

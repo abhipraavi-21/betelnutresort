@@ -11,11 +11,20 @@ type GalleryImage = {
 
 export function GalleryLightbox({ images }: { images: GalleryImage[] }) {
   const [active, setActive] = useState<number | null>(null);
+  const [closing, setClosing] = useState(false);
+
+  function closeLightbox() {
+    setClosing(true);
+    window.setTimeout(() => {
+      setActive(null);
+      setClosing(false);
+    }, 180);
+  }
 
   useEffect(() => {
     function onKey(event: KeyboardEvent) {
       if (active === null) return;
-      if (event.key === 'Escape') setActive(null);
+      if (event.key === 'Escape') closeLightbox();
       if (event.key === 'ArrowLeft') setActive((value) => previous(value, images.length));
       if (event.key === 'ArrowRight') setActive((value) => next(value, images.length));
     }
@@ -34,8 +43,8 @@ export function GalleryLightbox({ images }: { images: GalleryImage[] }) {
         ))}
       </div>
       {active !== null && (
-        <div className="lightbox" role="dialog" aria-modal="true" aria-label="Gallery image">
-          <button className="icon-button close" type="button" aria-label="Close gallery" onClick={() => setActive(null)}>
+        <div className={`lightbox ${closing ? 'closing' : ''}`} role="dialog" aria-modal="true" aria-label="Gallery image">
+          <button className="icon-button close" type="button" aria-label="Close gallery" onClick={closeLightbox}>
             <X size={22} aria-hidden="true" />
           </button>
           <button

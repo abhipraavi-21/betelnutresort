@@ -16,7 +16,7 @@ export function Header() {
   }, [open]);
 
   return (
-    <header className="site-header">
+    <header className={`site-header ${pathname === '/' ? 'home-header' : ''}`}>
       <div className="container nav-wrap">
         <Link className="brand" href="/" aria-label="Betelnut Resort home">
           <span>Betelnut Resort</span>
