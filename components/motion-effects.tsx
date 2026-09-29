@@ -11,6 +11,7 @@ const revealSelectors = [
   '.section .pill-list',
   '.section .feature-list',
   '.section .form',
+  '.deal-card',
   '.gallery-button',
   '.accordion details',
   '.cta-band .button-row',

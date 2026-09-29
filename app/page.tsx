@@ -1,21 +1,21 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import {
-  CalendarCheck,
   Car,
   ChevronRight,
+  Gift,
   Gamepad2,
   House,
   MapPin,
-  MessageCircle,
   Sparkles,
   Waves,
   Wifi
 } from 'lucide-react';
+import { BookingWidget } from '@/components/booking-widget';
 import { CtaBand } from '@/components/cta';
 import { EnquiryForm } from '@/components/enquiry-form';
 import { GalleryLightbox } from '@/components/gallery-lightbox';
-import { amenities, cottageFeatures, faqs, galleryImages, images, pageMetadata, site, whatsappUrl } from '@/lib/site-data';
+import { amenities, cottageFeatures, faqs, galleryImages, images, pageMetadata, site } from '@/lib/site-data';
 
 const homeFacilities = [
   { title: 'Swimming pool', text: 'A resort pool with posted guest policy and timings.', Icon: Waves },
@@ -24,6 +24,24 @@ const homeFacilities = [
   { title: 'Indoor games', text: 'Table tennis, chess, carrom, darts, handball and frisbee.', Icon: Gamepad2 },
   { title: 'Children’s play area', text: 'A dedicated area to keep younger guests entertained.', Icon: Sparkles },
   { title: 'Parking', text: 'Ample parking space for vehicles.', Icon: Car }
+];
+
+const offerCards = [
+  {
+    title: 'Weekend cottage stay',
+    text: 'Plan a short Diveagar break with pool access, garden spaces and classic cottages.',
+    meta: 'Best for families'
+  },
+  {
+    title: 'Konkan dining plan',
+    text: 'Check meal timings before arrival and pair your stay with local coastal dining.',
+    meta: 'Restaurant on site'
+  },
+  {
+    title: 'Beach and temple circuit',
+    text: 'Use Betelnut Resort as a base for Diveagar Beach, Suvarna Ganesh Mandir and coastal drives.',
+    meta: 'Trip idea'
+  }
 ];
 
 export const metadata = pageMetadata(
@@ -47,29 +65,34 @@ export default function HomePage() {
             A green cottage resort in Diveagar with a swimming pool, Konkan dining, indoor games and a relaxed base for beach days,
             temples and coastal drives.
           </p>
-          <div className="button-row">
-            <a className="btn brass" href={site.bookingUrl} target="_blank" rel="noreferrer">
-              <CalendarCheck size={18} aria-hidden="true" />
-              Book Now
-            </a>
-            <a className="btn secondary" href={whatsappUrl()} target="_blank" rel="noreferrer">
-              <MessageCircle size={18} aria-hidden="true" />
-              WhatsApp Enquiry
-            </a>
+          <BookingWidget />
+        </div>
+      </section>
+
+      <section className="deals-section">
+        <div className="container">
+          <div className="section-head row">
+            <div>
+              <p className="eyebrow">Offers & Trip Ideas</p>
+              <h2>Plan your Diveagar stay faster.</h2>
+            </div>
+            <p className="lead">
+              Pick a stay style, check availability and move straight to enquiry or booking without searching through every page.
+            </p>
           </div>
-          <div className="hero-panel" aria-label="Resort highlights">
-            <div className="hero-stat">
-              <strong>12</strong>
-              <span>cottage stays listed on the current site</span>
-            </div>
-            <div className="hero-stat">
-              <strong>Pool</strong>
-              <span>with posted guest policy and timings</span>
-            </div>
-            <div className="hero-stat">
-              <strong>9-7</strong>
-              <span>office calling hours</span>
-            </div>
+          <div className="deal-grid">
+            {offerCards.map((offer) => (
+              <article className="deal-card" key={offer.title}>
+                <div className="deal-icon">
+                  <Gift size={20} aria-hidden="true" />
+                </div>
+                <div>
+                  <span>{offer.meta}</span>
+                  <h3>{offer.title}</h3>
+                  <p>{offer.text}</p>
+                </div>
+              </article>
+            ))}
           </div>
         </div>
       </section>
